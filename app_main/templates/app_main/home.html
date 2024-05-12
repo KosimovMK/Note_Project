@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="page-container" style="background-image: url('{% static "images/image1.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        min-height: 100vh;">
+    <h2 class="text-center border border-black px-4 py-2">{{ full_name|title }}</h2>
+
+    <div>
+        <h2 class="text-center border border-black px-4 py-2">Notes:</h2>
+        <table class="border-collapse border border-black mt-4 w-full">
+            <thead>
+                <tr>
+                    <th class="border border-black px-4 py-2">Title</th>
+                    <th class="border border-black px-4 py-2">Description</th>
+                    <th class="border border-black px-4 py-2">Created</th>
+                    <th class="border border-black px-4 py-2">Updated</th>
+                    <th class="border border-black px-4 py-2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for note in notes %}
+                <tr>
+                    <td class="border border-black px-4 py-2">{{ note.title }}</td>
+                    <td class="border border-black px-4 py-2">{{ note.description }}</td>
+                    <td class="border border-black px-4 py-2">{{ note.created }}</td>
+                    <td class="border border-black px-4 py-2">{{ note.updated }}</td>
+                    <td class="border border-black px-4 py-2 flex items-center">
+                        <a href="{% url 'edit_note' note.id %}" class="px-2 py-1 rounded bg-blue-500 text-white hover:bg-blue-600">Edit</a>
+                        <form action="{% url 'delete_note' note.id %}" method="post" class="ml-2">
+                            {% csrf_token %}
+                            <button type="submit" class="px-2 py-1 rounded bg-red-500 text-white hover:bg-red-600">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="flex justify-between items-center mt-8">
+        <a href="{% url 'create_note' %}" class="border px-4 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600">Create note</a>
+        <a href="{% url 'logout' %}" class="border px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600">Logout</a>
+    </div>
+</div>
+{% endblock content %}
