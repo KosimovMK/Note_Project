@@ -2,7 +2,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fbug&c2k8)y4f*v#3rvl$i2j!0l=5zzl8vr(&g-^zep&*aa&z@'
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
 LOGIN_REDIRECT_URL = '/'
 AUTH_USER_MODEL = 'app_users.User'
@@ -14,7 +14,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
     'app_main.apps.AppMainConfig',
     'app_users.apps.AppUsersConfig',
 ]
@@ -29,7 +28,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'PROJECT.urls'
+ROOT_URLCONF = 'Note_Project.urls'
 
 TEMPLATES = [
     {
@@ -49,7 +48,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'PROJECT.wsgi.application'
+WSGI_APPLICATION = 'Note_Project.wsgi.application'
 
 
 # Database
